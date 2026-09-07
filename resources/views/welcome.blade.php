@@ -281,7 +281,7 @@
 <div class="grid grid-cols-1 md:grid-cols-4 gap-lg px-margin-desktop py-xl max-w-max-width mx-auto">
 <!-- Brand Column -->
 <div class="flex flex-col gap-4">
-<span class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-on-surface tracking-tight">Linkjobs</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-on-surface tracking-tight">Link</span>
 <p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Linkjobs. Built for engineers.</p>
 </div>
 <!-- Links -->
