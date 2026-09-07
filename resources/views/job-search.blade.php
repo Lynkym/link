@@ -177,7 +177,7 @@
 <header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/20 dark:border-outline-variant/10 shadow-sm fixed top-0 w-full z-50 transition-all duration-200">
 <div class="flex justify-between items-center px-margin-desktop h-20 max-w-max-width mx-auto">
 <div class="flex items-center gap-lg">
-<a class="flex items-center gap-sm font-headline-md text-headline-md font-bold text-primary-fixed dark:text-primary-fixed-dim tracking-tight" href="#">
+<a class="flex items-center gap-sm font-headline-md text-headline-md font-bold text-primary-fixed dark:text-primary-fixed-dim tracking-tight" href="{{ route('home') }}">
 <img alt="Linkjobs Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7pdvUHCWvFdCdudyEhI46xDExFm1M3ftLla1aMsn_i7iWQfwUVbNVnA2EhjKSr4cj8fQikNj1Fqb0old0ogOWIeg7sYZ1c_Bv2FXzSXDDwunAQIF-NBHgOYmcA9q30Cft8rydhGJxrqA7VDpsCz13NJMRE-8Xk1IA5pJWIs_UjPu9uoy8SptFhu12AdVZg77uwtArbJPbmjLFBpjtCK_dlwWe-13tvlfui8y1ybpT0jriLiR4Qslo"/>
                     Linkjobs
                 </a>
@@ -187,13 +187,13 @@
 </div>
 </div>
 <nav class="hidden md:flex items-center gap-xl font-label-caps text-label-caps">
-<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary-fixed pb-1 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-sm active:scale-95 transition-all duration-200" href="#">Find Jobs</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary-fixed pb-1 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-sm active:scale-95 transition-all duration-200" href="{{ route('jobs') }}">Find Jobs</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-sm py-xs active:scale-95 duration-200" href="#">Companies</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-sm py-xs active:scale-95 duration-200" href="#">Salaries</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-sm py-xs active:scale-95 duration-200" href="#">Resources</a>
 </nav>
 <div class="flex items-center gap-md">
-<button class="hidden md:block font-label-caps text-label-caps text-secondary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all">Sign In</button>
+<a href="{{ route('login') }}" class="hidden md:block font-label-caps text-label-caps text-secondary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all">Sign In</a>
 <button class="bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps px-md py-sm rounded hover:bg-primary-fixed-dim transition-colors active:scale-95 shadow-sm">Post a Job</button>
 <img alt="Developer Profile" class="w-8 h-8 rounded-full border border-outline-variant/30 hidden md:block" data-alt="A small, circular avatar portrait of a diverse software engineer with a neutral expression, viewed in a professional but casual tech environment. Deep navy background with subtle electric blue rim lighting to match the tech-focused, dark mode aesthetic of the UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDOffYeOfK_NE8T44PytZDkl-MEpVXohc9B368boVz2E1G8iAC9TOjaQyWBt-tv2YYQW2zv_Syv58q3H1txi1O2u9CrOkhq5KsPTCpvBfslh7x5xQbLnlRMSnJ5QcFLzRyy3ExDwb_FQ8SvDKN-42shljDYayxvqIXSCKKf9fHBLYLDWYpYmbj7l_wdoQULM3jf3IeJoUcpzwa9Wx1E4TzBnHfaWWQqi6A176KotDBNc_2RyNRoBJt"/>
 <button class="md:hidden text-on-surface">

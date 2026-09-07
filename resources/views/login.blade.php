@@ -166,7 +166,7 @@
 <!-- Navigation links suppressed for login/transactional intent to focus on the canvas -->
 </nav>
 <div>
-<a class="text-on-surface-variant hover:text-primary-fixed transition-colors font-body-sm text-body-sm active:scale-95 transition-transform" href="#">
+<a class="text-on-surface-variant hover:text-primary-fixed transition-colors font-body-sm text-body-sm active:scale-95 transition-transform" href="{{ route('home') }}">
                     Back to Home
                 </a>
 </div>
@@ -223,8 +223,8 @@
 <div class="mt-lg text-center">
 <p class="font-body-sm text-body-sm text-on-surface-variant">
                     Don't have an account? 
-                    <a class="text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all font-semibold" href="#">Sign Up</a>
-</p>
+                    <a class="text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all font-semibold" href="{{ route('register') }}">Sign Up</a>
+                </p>
 </div>
 </div>
 </main>

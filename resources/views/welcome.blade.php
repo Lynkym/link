@@ -222,15 +222,15 @@
 </div>
 <!-- Links (Desktop) -->
 <div class="hidden md:flex items-center gap-8">
-<a class="font-label-caps text-label-caps text-primary dark:text-primary-fixed-dim border-b-2 border-primary-fixed pb-1 transition-colors" href="#">Find Jobs</a>
+<a class="font-label-caps text-label-caps text-primary dark:text-primary-fixed-dim border-b-2 border-primary-fixed pb-1 transition-colors" href="{{ route('jobs') }}">Find Jobs</a>
 <a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-3 py-2 transition-all duration-200 active:scale-95" href="#">Companies</a>
 <a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-3 py-2 transition-all duration-200 active:scale-95" href="#">Salaries</a>
 <a class="font-label-caps text-label-caps text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-3 py-2 transition-all duration-200 active:scale-95" href="#">Resources</a>
 </div>
 <!-- Actions (Desktop) -->
 <div class="hidden md:flex items-center gap-4">
-<button class="font-label-caps text-label-caps text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all duration-200">Sign In</button>
-<button class="font-label-caps text-label-caps bg-primary-fixed text-[#0A192F] px-6 py-3 rounded-DEFAULT font-semibold hover:opacity-90 transition-opacity active:scale-95">Post a Job</button>
+<a href="{{ route('login') }}" class="font-label-caps text-label-caps text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all duration-200">Sign In</a>
+<a href="{{ route('jobs') }}" class="font-label-caps text-label-caps bg-primary-fixed text-[#0A192F] px-6 py-3 rounded-DEFAULT font-semibold hover:opacity-90 transition-opacity active:scale-95">Find Jobs</a>
 </div>
 <!-- Mobile Menu Toggle -->
 <button class="md:hidden text-primary-fixed p-2">

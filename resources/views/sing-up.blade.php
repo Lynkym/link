@@ -276,8 +276,8 @@
 <div class="mt-lg text-center">
 <p class="font-body-sm text-body-sm text-on-surface-variant">
                     Already have an account? 
-                    <a class="text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 font-headline-md font-semibold transition-all" href="#">Sign In</a>
-</p>
+                    <a class="text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 font-headline-md font-semibold transition-all" href="{{ route('login') }}">Sign In</a>
+                </p>
 </div>
 </div>
 <!-- Footer Links -->

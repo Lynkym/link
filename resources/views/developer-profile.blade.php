@@ -154,7 +154,7 @@
                 </a>
 <!-- Desktop Navigation -->
 <div class="hidden md:flex gap-6 items-center font-label-caps text-label-caps">
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors transition-all duration-200 active:scale-95 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-3 py-2" href="#">Find Jobs</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors transition-all duration-200 active:scale-95 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-3 py-2" href="{{ route('jobs') }}">Find Jobs</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors transition-all duration-200 active:scale-95 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-3 py-2" href="#">Companies</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors transition-all duration-200 active:scale-95 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-3 py-2" href="#">Salaries</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors transition-all duration-200 active:scale-95 hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-3 py-2" href="#">Resources</a>
@@ -162,7 +162,7 @@
 </div>
 <!-- Trailing Actions -->
 <div class="flex items-center gap-4">
-<a class="font-label-caps text-label-caps btn-secondary px-4 py-2 rounded-DEFAULT transition-colors hidden md:block" href="#">Sign In</a>
+<a class="font-label-caps text-label-caps btn-secondary px-4 py-2 rounded-DEFAULT transition-colors hidden md:block" href="{{ route('login') }}">Sign In</a>
 <a class="font-label-caps text-label-caps btn-primary px-4 py-2 rounded-DEFAULT font-medium transition-colors hidden md:block" href="#">Post a Job</a>
 <!-- Mobile Menu Button -->
 <button class="md:hidden text-primary-fixed p-2">

@@ -144,7 +144,7 @@
 <span class="font-headline-md text-headline-md font-bold text-primary-fixed dark:text-primary-fixed-dim tracking-tight">Linkjobs</span>
 </div>
 <nav class="hidden md:flex items-center gap-lg">
-<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary-fixed pb-1 font-label-caps text-label-caps" href="#">Find Jobs</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary-fixed pb-1 font-label-caps text-label-caps" href="{{ route('jobs') }}">Find Jobs</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-2 py-1 font-label-caps text-label-caps" href="#">Companies</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-2 py-1 font-label-caps text-label-caps" href="#">Salaries</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors hover:bg-secondary-container/50 dark:hover:bg-secondary-container/30 rounded-lg px-2 py-1 font-label-caps text-label-caps" href="#">Resources</a>
