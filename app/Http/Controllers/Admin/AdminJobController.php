@@ -3,77 +3,118 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class AdminJobController extends Controller
 {
     public function index(Request $request)
     {
-        $jobs = collect([
-            (object) [
-                'id' => 1,
-                'title' => 'Senior Frontend Engineer',
-                'company' => 'Vercel',
-                'location' => 'Remote, US',
-                'salary' => '$150k - $180k',
-                'status' => 'active',
-                'created_at' => now()->subDays(2),
-                'stack' => ['React', 'Next.js', 'TypeScript'],
-            ],
-            (object) [
-                'id' => 2,
-                'title' => 'React UI Developer',
-                'company' => 'CloudScale',
-                'location' => 'New York, NY',
-                'salary' => '$130k - $160k',
-                'status' => 'active',
-                'created_at' => now()->subDays(5),
-                'stack' => ['React', 'Redux', 'Tailwind CSS'],
-            ],
-            (object) [
-                'id' => 3,
-                'title' => 'Backend Engineer',
-                'company' => 'Stripe',
-                'location' => 'San Francisco, CA',
-                'salary' => '$160k - $200k',
-                'status' => 'pending',
-                'created_at' => now()->subDays(1),
-                'stack' => ['Go', 'PostgreSQL', 'Redis'],
-            ],
-        ]);
+        $query = Job::query();
+
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('company', 'like', "%{$search}%")
+                    ->orWhere('location', 'like', "%{$search}%");
+            });
+        }
+
+        if ($status = $request->input('status')) {
+            $query->where('status', $status);
+        }
+
+        $jobs = $query->latest()->paginate(12)->withQueryString();
 
         return view('admin.jobs.index', compact('jobs'));
     }
 
-    public function show($id)
+    public function create()
     {
-        $job = (object) [
-            'id' => $id,
-            'title' => 'Senior Frontend Engineer',
-            'company' => 'Vercel',
-            'location' => 'Remote, US',
-            'salary' => '$150k - $180k',
-            'status' => 'active',
-            'description' => 'We are looking for a Senior Frontend Engineer to help us build the next generation of our web platform.',
-            'stack' => ['React', 'Next.js', 'TypeScript'],
-        ];
+        return view('admin.jobs.create');
+    }
 
+    public function store(Request $request)
+    {
+        $data = $request->only([
+            'title', 'company', 'location', 'work_mode',
+            'salary_min', 'salary_max', 'description',
+            'stack', 'status', 'contact_email',
+        ]);
+
+        if (! empty($data['stack']) && is_string($data['stack'])) {
+            $data['stack'] = array_map('trim', explode(',', $data['stack']));
+            $data['stack'] = array_filter($data['stack']);
+            $data['stack'] = array_values($data['stack']);
+        }
+
+        $validated = \Validator::make($data, [
+            'title' => 'required|string|max:255',
+            'company' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'work_mode' => 'required|in:remote,onsite,hybrid',
+            'salary_min' => 'nullable|numeric|min:0',
+            'salary_max' => 'nullable|numeric|min:0',
+            'description' => 'required|string',
+            'stack' => 'nullable|array',
+            'status' => 'required|in:active,pending,closed',
+            'contact_email' => 'nullable|email|max:255',
+        ])->validated();
+
+        Job::create($validated);
+
+        return redirect()->route('admin.jobs.index')
+            ->with('success', 'Oferta de empleo creada correctamente.');
+    }
+
+    public function show(Job $job)
+    {
         return view('admin.jobs.show', compact('job'));
     }
 
-    public function updateStatus($id, Request $request)
+    public function edit(Job $job)
     {
-        $request->validate([
-            'status' => 'required|in:active,pending,rejected',
-        ]);
-
-        return redirect()->route('admin.jobs.index')
-            ->with('success', 'Estado del empleo actualizado.');
+        return view('admin.jobs.edit', compact('job'));
     }
 
-    public function destroy($id)
+    public function update(Request $request, Job $job)
     {
+        $data = $request->only([
+            'title', 'company', 'location', 'work_mode',
+            'salary_min', 'salary_max', 'description',
+            'stack', 'status', 'contact_email',
+        ]);
+
+        if (! empty($data['stack']) && is_string($data['stack'])) {
+            $data['stack'] = array_map('trim', explode(',', $data['stack']));
+            $data['stack'] = array_filter($data['stack']);
+            $data['stack'] = array_values($data['stack']);
+        }
+
+        $validated = \Validator::make($data, [
+            'title' => 'required|string|max:255',
+            'company' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'work_mode' => 'required|in:remote,onsite,hybrid',
+            'salary_min' => 'nullable|numeric|min:0',
+            'salary_max' => 'nullable|numeric|min:0',
+            'description' => 'required|string',
+            'stack' => 'nullable|array',
+            'status' => 'required|in:active,pending,closed',
+            'contact_email' => 'nullable|email|max:255',
+        ])->validated();
+
+        $job->update($validated);
+
         return redirect()->route('admin.jobs.index')
-            ->with('success', 'Empleo eliminado correctamente.');
+            ->with('success', 'Oferta de empleo actualizada correctamente.');
+    }
+
+    public function destroy(Job $job)
+    {
+        $job->delete();
+
+        return redirect()->route('admin.jobs.index')
+            ->with('success', 'Oferta de empleo eliminada correctamente.');
     }
 }

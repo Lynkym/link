@@ -32,9 +32,12 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'admin.auth'])->group
 
     // Jobs
     Route::get('/jobs', [AdminJobController::class, 'index'])->name('jobs.index');
-    Route::get('/jobs/{id}', [AdminJobController::class, 'show'])->name('jobs.show');
-    Route::patch('/jobs/{id}/status', [AdminJobController::class, 'updateStatus'])->name('jobs.update.status');
-    Route::delete('/jobs/{id}', [AdminJobController::class, 'destroy'])->name('jobs.destroy');
+    Route::get('/jobs/create', [AdminJobController::class, 'create'])->name('jobs.create');
+    Route::post('/jobs', [AdminJobController::class, 'store'])->name('jobs.store');
+    Route::get('/jobs/{job}', [AdminJobController::class, 'show'])->name('jobs.show');
+    Route::get('/jobs/{job}/edit', [AdminJobController::class, 'edit'])->name('jobs.edit');
+    Route::put('/jobs/{job}', [AdminJobController::class, 'update'])->name('jobs.update');
+    Route::delete('/jobs/{job}', [AdminJobController::class, 'destroy'])->name('jobs.destroy');
 
     // Settings
     Route::get('/settings', [AdminSettingsController::class, 'index'])->name('settings.index');

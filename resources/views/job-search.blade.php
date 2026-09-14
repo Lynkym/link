@@ -268,72 +268,46 @@
 </aside>
 <!-- Main Job List -->
 <section class="flex-grow space-y-md">
-<!-- Job Card 1 -->
+@forelse($jobs as $job)
 <article class="bg-surface-container-high border border-outline-variant/30 rounded-lg p-lg hover:border-primary-fixed hover:-translate-y-1 transition-all duration-300 group flex flex-col md:flex-row gap-md relative overflow-hidden">
 <div class="absolute inset-0 bg-primary-fixed/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 <div class="flex-shrink-0">
-<img alt="Company Logo" class="w-16 h-16 rounded bg-surface border border-outline-variant/20 p-xs object-contain" data-alt="A sleek, modern tech startup logo featuring a geometric 'V' shape in white and teal, set against a dark, minimalist background. The style is sharp, clean, and highly professional, typical of a cutting-edge SaaS company." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuOZoaTzWPSFuaEzbPqwOmyaRKkOFA5Qn2uSw_doEBN7CfYRxi8hhGn8y3uKe6ysnsWOuVYMpT7CQHR2OqIo4n9_6WwgvsCJ6Q-HYkd2qEQBPxZxp8iQfHTb9096P7huGrYjIpZc9azD3siCULOt6Z9BKX7hCGkRyIpw1R6f1rhyxzqYHvNw5dXerkc69No0k6vPrxeqAzQzVgtqNVf-_EvfwnHtERK8_xS5utblVnM4CnsslYSUE0"/>
+<div class="w-16 h-16 rounded bg-surface border border-outline-variant/20 p-xs flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[28px]">business</span>
+</div>
 </div>
 <div class="flex-grow">
 <div class="flex justify-between items-start mb-sm">
 <div>
-<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-fixed transition-colors">Senior Frontend Engineer</h3>
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-fixed transition-colors">{{ $job->title }}</h3>
 <p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-sm">
-<span class="font-medium text-secondary-fixed">Vercel</span>
+<span class="font-medium text-secondary-fixed">{{ $job->company }}</span>
 <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
-<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span> Remote, US</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span> {{ $job->location }}</span>
 </p>
 </div>
 <button class="text-on-surface-variant hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined" data-icon="bookmark_border">bookmark_border</span></button>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant/80 mb-md line-clamp-2">We are looking for a Senior Frontend Engineer to help us build the next generation of our web platform. You will work closely with design and product to create seamless developer experiences.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant/80 mb-md line-clamp-2">{{ $job->description }}</p>
+@if($job->stack)
 <div class="flex flex-wrap items-center gap-sm mb-md">
-<span class="bg-surface border border-primary-fixed/20 text-on-surface font-label-caps text-label-caps px-sm py-xs rounded-full">React</span>
-<span class="bg-surface border border-primary-fixed/20 text-on-surface font-label-caps text-label-caps px-sm py-xs rounded-full">Next.js</span>
-<span class="bg-surface border border-primary-fixed/20 text-on-surface font-label-caps text-label-caps px-sm py-xs rounded-full">TypeScript</span>
+@foreach($job->stack as $tech)
+<span class="bg-surface border border-primary-fixed/20 text-on-surface font-label-caps text-label-caps px-sm py-xs rounded-full">{{ $tech }}</span>
+@endforeach
 </div>
+@endif
 <div class="flex justify-between items-center mt-auto border-t border-outline-variant/10 pt-md">
-<span class="font-code-md text-code-md text-primary-fixed-dim">$150k - $180k</span>
-<button class="bg-transparent border border-primary-fixed text-primary-fixed hover:bg-primary-fixed/10 font-label-caps text-label-caps px-md py-sm rounded transition-colors">Apply Now</button>
+<span class="font-code-md text-code-md text-primary-fixed-dim">{{ $job->salary_range ?: 'No especificado' }}</span>
+<a href="{{ route('jobs.show', $job) }}" class="bg-transparent border border-primary-fixed text-primary-fixed hover:bg-primary-fixed/10 font-label-caps text-label-caps px-md py-sm rounded transition-colors">Ver Detalles</a>
 </div>
 </div>
 </article>
-<!-- Job Card 2 -->
-<article class="bg-surface-container-high border border-outline-variant/30 rounded-lg p-lg hover:border-primary-fixed hover:-translate-y-1 transition-all duration-300 group flex flex-col md:flex-row gap-md relative overflow-hidden">
-<div class="absolute inset-0 bg-primary-fixed/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-<div class="flex-shrink-0">
-<img alt="Company Logo" class="w-16 h-16 rounded bg-surface border border-outline-variant/20 p-xs object-contain" data-alt="A minimalist logo design for a cloud infrastructure company, depicting abstract overlapping clouds or server racks in subtle shades of slate gray and electric blue, set against a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI1WGYe0scA1nuBih3ZgUTDOdUL53D4kB0KBoU1H3ZL0WmnRckrnZD_ltGS6WgXAyaR0lg5HQtktsAkLnFSIPE1AvYV_eKi8vZrDlY1LxAdMa2QK8yXRJFOYJxW1g9Xl1FzMS_W44ArsPQrjIhEjtUDbFyYUEWHCtMu7og2qfnxZ-4nS9rsLn70OV0k38aK1CEy-z_ZRBRIqr0o5W4235oCE7rgqYLVbM6a8a8j4lvh-MV9Rd3hk_P"/>
+@empty
+<div class="text-center py-xl">
+<span class="material-symbols-outlined text-on-surface-variant/30 text-[64px]">work_off</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-md">No hay ofertas de empleo disponibles en este momento.</p>
 </div>
-<div class="flex-grow">
-<div class="flex justify-between items-start mb-sm">
-<div>
-<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-fixed transition-colors">React UI Developer</h3>
-<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-sm">
-<span class="font-medium text-secondary-fixed">CloudScale</span>
-<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
-<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span> New York, NY (Hybrid)</span>
-</p>
-</div>
-<button class="text-on-surface-variant hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined" data-icon="bookmark_border">bookmark_border</span></button>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant/80 mb-md line-clamp-2">Join our core platform team to build complex, data-heavy dashboards for enterprise clients. Focus on performance optimization and reusable component architecture.</p>
-<div class="flex flex-wrap items-center gap-sm mb-md">
-<span class="bg-surface border border-primary-fixed/20 text-on-surface font-label-caps text-label-caps px-sm py-xs rounded-full">React</span>
-<span class="bg-surface border border-primary-fixed/20 text-on-surface font-label-caps text-label-caps px-sm py-xs rounded-full">Redux</span>
-<span class="bg-surface border border-primary-fixed/20 text-on-surface font-label-caps text-label-caps px-sm py-xs rounded-full">Tailwind CSS</span>
-</div>
-<div class="flex justify-between items-center mt-auto border-t border-outline-variant/10 pt-md">
-<span class="font-code-md text-code-md text-primary-fixed-dim">$130k - $160k</span>
-<button class="bg-transparent border border-primary-fixed text-primary-fixed hover:bg-primary-fixed/10 font-label-caps text-label-caps px-md py-sm rounded transition-colors">Apply Now</button>
-</div>
-</div>
-</article>
-<!-- Load More -->
-<div class="flex justify-center pt-md">
-<button class="text-secondary-fixed font-label-caps text-label-caps hover:underline decoration-primary-fixed underline-offset-4 transition-all flex items-center gap-xs">
-                    Load More Jobs <span class="material-symbols-outlined text-[18px]" data-icon="expand_more">expand_more</span>
-</button>
-</div>
+@endforelse
 </section>
 </main>
 <!-- Footer -->

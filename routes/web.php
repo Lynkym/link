@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,11 +16,13 @@ Route::get('/register', function () {
 })->name('register');
 
 Route::get('/jobs', function () {
-    return view('job-search');
+    $jobs = Job::where('status', 'active')->latest()->get();
+
+    return view('job-search', compact('jobs'));
 })->name('jobs');
 
-Route::get('/jobs/1', function () {
-    return view('job-details');
+Route::get('/jobs/{job}', function (Job $job) {
+    return view('job-details', compact('job'));
 })->name('jobs.show');
 
 Route::get('/profile', function () {
