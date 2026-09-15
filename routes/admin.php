@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminJobController;
+use App\Http\Controllers\Admin\AdminPermissionController;
+use App\Http\Controllers\Admin\AdminRoleController;
 use App\Http\Controllers\Admin\AdminSettingsController;
 use App\Http\Controllers\Admin\AdminUserController;
 use Illuminate\Support\Facades\Route;
@@ -46,4 +48,10 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'admin.auth'])->group
     // Settings
     Route::get('/settings', [AdminSettingsController::class, 'index'])->name('settings.index');
     Route::put('/settings', [AdminSettingsController::class, 'update'])->name('settings.update');
+
+    // Roles
+    Route::resource('roles', AdminRoleController::class);
+
+    // Permissions
+    Route::resource('permissions', AdminPermissionController::class);
 });

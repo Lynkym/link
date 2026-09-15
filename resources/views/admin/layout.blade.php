@@ -189,6 +189,17 @@
                 <span class="material-symbols-outlined text-[20px]">settings</span>
                 <span class="font-body-sm text-body-sm">Configuración</span>
             </a>
+            <div class="border-b border-outline-variant/20 my-sm"></div>
+            <a href="{{ route('admin.roles.index') }}" 
+               class="sidebar-link flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                <span class="material-symbols-outlined text-[20px]">admin_panel_settings</span>
+                <span class="font-body-sm text-body-sm">Roles</span>
+            </a>
+            <a href="{{ route('admin.permissions.index') }}" 
+               class="sidebar-link flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface {{ request()->routeIs('admin.permissions.*') ? 'active' : '' }}">
+                <span class="material-symbols-outlined text-[20px]">lock</span>
+                <span class="font-body-sm text-body-sm">Permisos</span>
+            </a>
         </nav>
 
         {{-- User Info --}}
