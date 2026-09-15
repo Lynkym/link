@@ -163,6 +163,12 @@
 
         {{-- Navigation --}}
         <nav class="flex-1 p-md space-y-xs overflow-y-auto">
+            <a href="{{ route('home') }}" 
+               class="sidebar-link flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface">
+                <span class="material-symbols-outlined text-[20px]">home</span>
+                <span class="font-body-sm text-body-sm">Homepage</span>
+            </a>
+            <div class="border-b border-outline-variant/20 my-sm"></div>
             <a href="{{ route('admin.dashboard') }}" 
                class="sidebar-link flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                 <span class="material-symbols-outlined text-[20px]">dashboard</span>
