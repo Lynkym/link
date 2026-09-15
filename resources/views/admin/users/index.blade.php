@@ -37,6 +37,7 @@
                     <tr class="border-b border-outline-variant/20">
                         <th class="text-left px-lg py-md font-label-caps text-label-caps text-on-surface-variant">USUARIO</th>
                         <th class="text-left px-lg py-md font-label-caps text-label-caps text-on-surface-variant">EMAIL</th>
+                        <th class="text-left px-lg py-md font-label-caps text-label-caps text-on-surface-variant">ROL</th>
                         <th class="text-left px-lg py-md font-label-caps text-label-caps text-on-surface-variant">REGISTRO</th>
                         <th class="text-right px-lg py-md font-label-caps text-label-caps text-on-surface-variant">ACCIONES</th>
                     </tr>
@@ -56,17 +57,29 @@
                                 <span class="font-body-sm text-body-sm text-on-surface-variant">{{ $user->email }}</span>
                             </td>
                             <td class="px-lg py-md">
+                                @if($user->role === 'admin')
+                                    <span class="font-label-caps text-label-caps bg-primary-fixed/10 text-primary-fixed px-sm py-xs rounded-full">Admin</span>
+                                @elseif($user->role === 'recruiter')
+                                    <span class="font-label-caps text-label-caps bg-secondary-fixed/10 text-secondary-fixed px-sm py-xs rounded-full">Reclutador</span>
+                                @else
+                                    <span class="font-label-caps text-label-caps bg-surface-container text-on-surface-variant px-sm py-xs rounded-full">Desarrollador</span>
+                                @endif
+                            </td>
+                            <td class="px-lg py-md">
                                 <span class="font-body-sm text-body-sm text-on-surface-variant">{{ $user->created_at->format('d/m/Y') }}</span>
                             </td>
                             <td class="px-lg py-md text-right">
                                 <div class="flex items-center justify-end gap-xs">
-                                    <a href="{{ route('admin.users.show', $user) }}" class="p-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant hover:text-primary-fixed">
+                                    <a href="{{ route('admin.users.show', $user) }}" class="p-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant hover:text-primary-fixed" title="Ver">
                                         <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                    </a>
+                                    <a href="{{ route('admin.users.edit', $user) }}" class="p-xs rounded hover:bg-surface-container-high transition-colors text-on-surface-variant hover:text-primary-fixed" title="Editar">
+                                        <span class="material-symbols-outlined text-[18px]">edit</span>
                                     </a>
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="p-xs rounded hover:bg-error-container/20 transition-colors text-on-surface-variant hover:text-error">
+                                        <button type="submit" class="p-xs rounded hover:bg-error-container/20 transition-colors text-on-surface-variant hover:text-error" title="Eliminar">
                                             <span class="material-symbols-outlined text-[18px]">delete</span>
                                         </button>
                                     </form>
@@ -75,7 +88,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-lg py-xl text-center">
+                            <td colspan="5" class="px-lg py-xl text-center">
                                 <span class="material-symbols-outlined text-on-surface-variant/30 text-[48px]">person_off</span>
                                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-sm">No se encontraron usuarios</p>
                             </td>
