@@ -111,3 +111,70 @@ test('the role is required when creating a user', function () {
         ])
         ->assertSessionHasErrors('role');
 });
+
+test('creating an admin user also creates its admin account', function () {
+    Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+
+    $this->actingAs(makeAdminForCreate('super_admin'), 'admin')
+        ->post(route('admin.users.store'), [
+            'name' => 'Nuevo Admin',
+            'email' => 'nuevo-admin@linkjobs.com',
+            'role' => 'admin',
+            'password' => 'secret-1234',
+            'password_confirmation' => 'secret-1234',
+        ])
+        ->assertRedirect(route('admin.users.index'));
+
+    $admin = AdminUser::where('email', 'nuevo-admin@linkjobs.com')->first();
+
+    expect($admin)->not->toBeNull()
+        ->and($admin->name)->toBe('Nuevo Admin')
+        ->and($admin->role)->toBe('admin')
+        ->and($admin->is_active)->toBeTrue()
+        ->and(Hash::check('secret-1234', $admin->password))->toBeTrue();
+});
+
+test('creating a non admin user does not create an admin account', function () {
+    Role::firstOrCreate(['name' => 'developer', 'guard_name' => 'web']);
+
+    $this->actingAs(makeAdminForCreate('super_admin'), 'admin')
+        ->post(route('admin.users.store'), [
+            'name' => 'Nuevo Developer',
+            'email' => 'nuevo-dev@linkjobs.com',
+            'role' => 'developer',
+            'password' => 'secret-1234',
+            'password_confirmation' => 'secret-1234',
+        ])
+        ->assertRedirect(route('admin.users.index'));
+
+    $this->assertDatabaseMissing('admin_users', ['email' => 'nuevo-dev@linkjobs.com']);
+});
+
+test('creating an admin user reuses an existing admin account with the same email', function () {
+    Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+    AdminUser::create([
+        'name' => 'Existente',
+        'email' => 'existente@linkjobs.com',
+        'password' => 'old-secret',
+        'role' => 'super_admin',
+        'is_active' => true,
+    ]);
+
+    $this->actingAs(makeAdminForCreate('admin'), 'admin')
+        ->post(route('admin.users.store'), [
+            'name' => 'Existente Renombrado',
+            'email' => 'existente@linkjobs.com',
+            'role' => 'admin',
+            'password' => 'secret-1234',
+            'password_confirmation' => 'secret-1234',
+        ])
+        ->assertRedirect(route('admin.users.index'));
+
+    expect(AdminUser::where('email', 'existente@linkjobs.com')->count())->toBe(1);
+
+    $admin = AdminUser::where('email', 'existente@linkjobs.com')->first();
+
+    expect($admin->name)->toBe('Existente Renombrado')
+        ->and($admin->role)->toBe('super_admin')
+        ->and(Hash::check('secret-1234', $admin->password))->toBeTrue();
+});

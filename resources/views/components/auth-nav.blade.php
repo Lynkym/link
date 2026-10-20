@@ -6,7 +6,11 @@
     @php($user = auth()->user())
     <div class="flex items-center gap-sm">
         <div class="hidden md:block leading-tight text-right">
-            <p class="font-body-sm text-body-sm text-on-surface">{{ $user->name }}</p>
+            <a href="{{ $user->panelUrl() }}"
+               class="font-body-sm text-body-sm text-on-surface hover:text-primary-fixed transition-colors"
+               title="Ir a mi panel">
+                {{ $user->name }}
+            </a>
             <p class="font-label-caps text-label-caps text-on-surface-variant">{{ $user->role_label }}</p>
         </div>
         <form action="{{ route('logout') }}" method="POST">

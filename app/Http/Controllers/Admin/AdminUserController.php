@@ -54,6 +54,8 @@ class AdminUserController extends Controller
 
         $user->syncRoles([$validated['role']]);
 
+        $user->syncAdminAccount(plainPassword: $validated['password']);
+
         return redirect()->route('admin.users.index')
             ->with('success', 'Usuario creado correctamente.');
     }
@@ -94,9 +96,16 @@ class AdminUserController extends Controller
             $attributes['password'] = $validated['password'];
         }
 
+        $previousEmail = $user->email;
+
         $user->update($attributes);
 
         $user->syncRoles([$validated['role']]);
+
+        $user->syncAdminAccount(
+            previousEmail: $previousEmail,
+            plainPassword: filled($validated['password'] ?? null) ? $validated['password'] : null,
+        );
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Usuario actualizado correctamente.');

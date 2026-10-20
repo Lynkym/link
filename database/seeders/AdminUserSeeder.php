@@ -11,11 +11,21 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         AdminUser::updateOrCreate(
+            ['email' => 'superadmin@linkjobs.com'],
+            [
+                'name' => 'Super Administrador',
+                'password' => Hash::make('SuperAdmin2026*'),
+                'role' => 'super_admin',
+                'is_active' => true,
+            ]
+        );
+
+        AdminUser::updateOrCreate(
             ['email' => 'admin@linkjobs.com'],
             [
-                'name' => 'Admin',
+                'name' => 'Administrador',
                 'password' => Hash::make('password'),
-                'role' => 'super_admin',
+                'role' => 'admin',
                 'is_active' => true,
             ]
         );

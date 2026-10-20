@@ -31,11 +31,12 @@ class AdminRoleController extends Controller
             'permissions.*' => 'exists:permissions,id',
         ]);
 
-        $role = Role::create(['name' => $validated['name']]);
+        $role = Role::create([
+            'name' => $validated['name'],
+            'guard_name' => 'web',
+        ]);
 
-        if (! empty($validated['permissions'])) {
-            $role->syncPermissions($validated['permissions']);
-        }
+        $role->syncPermissions($this->permissionsFromIds($validated['permissions'] ?? null));
 
         return redirect()->route('admin.roles.index')
             ->with('success', 'Rol creado correctamente.');
@@ -65,7 +66,7 @@ class AdminRoleController extends Controller
         ]);
 
         $role->update(['name' => $validated['name']]);
-        $role->syncPermissions($validated['permissions'] ?? []);
+        $role->syncPermissions($this->permissionsFromIds($validated['permissions'] ?? null));
 
         return redirect()->route('admin.roles.index')
             ->with('success', 'Rol actualizado correctamente.');
@@ -77,5 +78,17 @@ class AdminRoleController extends Controller
 
         return redirect()->route('admin.roles.index')
             ->with('success', 'Rol eliminado correctamente.');
+    }
+
+    /**
+     * @param  array<int, int|string>|null  $ids
+     * @return array<int, Permission>
+     */
+    private function permissionsFromIds(?array $ids): array
+    {
+        return Permission::query()
+            ->whereIn('id', $ids ?? [])
+            ->get()
+            ->all();
     }
 }

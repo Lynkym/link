@@ -45,6 +45,45 @@ class User extends Authenticatable
         return $this->hasRole('admin');
     }
 
+    public function panelUrl(): string
+    {
+        return match (true) {
+            $this->isDeveloper() => route('profile'),
+            $this->isRecruiter() => route('jobs'),
+            $this->hasRole(['admin', 'super_admin']) => route('admin.dashboard'),
+            default => route('home'),
+        };
+    }
+
+    public function syncAdminAccount(?string $previousEmail = null, ?string $plainPassword = null): void
+    {
+        if (! $this->hasRole('admin')) {
+            return;
+        }
+
+        $admin = AdminUser::query()
+            ->where('email', $previousEmail ?? $this->email)
+            ->first();
+
+        if ($admin === null) {
+            $admin = new AdminUser([
+                'email' => $this->email,
+                'role' => 'admin',
+                'is_active' => true,
+                'password' => $plainPassword ?? $this->password,
+            ]);
+        } else {
+            $admin->email = $this->email;
+
+            if ($plainPassword !== null) {
+                $admin->password = $plainPassword;
+            }
+        }
+
+        $admin->name = $this->name;
+        $admin->save();
+    }
+
     public function getRoleLabelAttribute(): string
     {
         return self::roleLabel($this->getRoleNames()->first() ?? '');
@@ -56,6 +95,7 @@ class User extends Authenticatable
             'developer' => 'Desarrollador',
             'recruiter' => 'Reclutador',
             'admin' => 'Administrador',
+            'super_admin' => 'Super Admin',
             default => 'Sin rol',
         };
     }

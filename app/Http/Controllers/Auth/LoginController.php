@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminUser;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,16 +33,34 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home'));
+        $user = Auth::user();
+
+        if ($user->hasRole('admin')) {
+            $this->loginIntoAdminGuard($user);
+        }
+
+        return redirect()->to($user->panelUrl());
     }
 
     public function logout(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect()->route('home');
+    }
+
+    private function loginIntoAdminGuard(User $user): void
+    {
+        $admin = AdminUser::query()->where('email', $user->email)->first();
+
+        if ($admin === null || ! $admin->isActive()) {
+            return;
+        }
+
+        Auth::guard('admin')->login($admin);
     }
 }

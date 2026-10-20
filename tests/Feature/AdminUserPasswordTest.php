@@ -131,3 +131,59 @@ test('the password must be confirmed', function () {
         ]))
         ->assertSessionHasErrors('password');
 });
+
+test('promoting a user to admin creates the matching admin account', function () {
+    Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+    $user = User::factory()->create(['password' => 'old-secret']);
+
+    $this->actingAs(adminWithRole('super_admin'), 'admin')
+        ->put(route('admin.users.update', $user), updateUserPayload($user, ['role' => 'admin']))
+        ->assertRedirect(route('admin.users.index'));
+
+    $admin = AdminUser::where('email', $user->email)->first();
+
+    expect($admin)->not->toBeNull()
+        ->and($admin->role)->toBe('admin')
+        ->and($admin->is_active)->toBeTrue()
+        ->and(Hash::check('old-secret', $admin->password))->toBeTrue();
+});
+
+test('changing the password of an admin user also updates the admin account', function () {
+    Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+    $user = User::factory()->create(['password' => 'old-secret']);
+    $user->syncRoles(['admin']);
+    $user->syncAdminAccount();
+
+    $this->actingAs(adminWithRole('super_admin'), 'admin')
+        ->put(route('admin.users.update', $user), updateUserPayload($user, [
+            'role' => 'admin',
+            'password' => 'new-secret-123',
+            'password_confirmation' => 'new-secret-123',
+        ]))
+        ->assertRedirect(route('admin.users.index'));
+
+    $admin = AdminUser::where('email', $user->email)->first();
+
+    expect(Hash::check('new-secret-123', $admin->password))->toBeTrue();
+});
+
+test('renaming an admin user keeps the same admin account', function () {
+    Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+    $user = User::factory()->create([
+        'email' => 'before@linkjobs.com',
+        'password' => 'secret-1234',
+    ]);
+    $user->syncRoles(['admin']);
+    $user->syncAdminAccount();
+
+    $this->actingAs(adminWithRole('super_admin'), 'admin')
+        ->put(route('admin.users.update', $user), updateUserPayload($user, [
+            'email' => 'after@linkjobs.com',
+            'role' => 'admin',
+        ]))
+        ->assertRedirect(route('admin.users.index'));
+
+    expect(AdminUser::where('email', 'after@linkjobs.com')->exists())->toBeTrue()
+        ->and(AdminUser::where('email', 'before@linkjobs.com')->exists())->toBeFalse()
+        ->and(AdminUser::count())->toBe(2);
+});
