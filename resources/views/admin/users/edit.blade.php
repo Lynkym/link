@@ -45,12 +45,15 @@
                 </div>
 
                 <div>
+                    @php($currentRole = old('role', $user->getRoleNames()->first()))
                     <label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs" for="role">Rol *</label>
                     <select name="role" id="role"
                             class="w-full bg-background border border-outline-variant rounded-lg px-md py-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed/20 transition-all">
-                        <option value="developer" {{ old('role', $user->role) === 'developer' ? 'selected' : '' }}>Desarrollador</option>
-                        <option value="recruiter" {{ old('role', $user->role) === 'recruiter' ? 'selected' : '' }}>Reclutador</option>
-                        <option value="admin" {{ old('role', $user->role) === 'admin' ? 'selected' : '' }}>Administrador</option>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->name }}" {{ $currentRole === $role->name ? 'selected' : '' }}>
+                                {{ match($role->name) { 'developer' => 'Desarrollador', 'recruiter' => 'Reclutador', 'admin' => 'Administrador', default => ucfirst($role->name) } }}
+                            </option>
+                        @endforeach
                     </select>
                     @error('role')
                         <p class="text-error text-body-sm mt-xs">{{ $message }}</p>

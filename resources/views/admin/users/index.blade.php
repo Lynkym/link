@@ -57,12 +57,15 @@
                                 <span class="font-body-sm text-body-sm text-on-surface-variant">{{ $user->email }}</span>
                             </td>
                             <td class="px-lg py-md">
-                                @if($user->role === 'admin')
+                                @php($primaryRole = $user->getRoleNames()->first())
+                                @if($primaryRole === 'admin')
                                     <span class="font-label-caps text-label-caps bg-primary-fixed/10 text-primary-fixed px-sm py-xs rounded-full">Admin</span>
-                                @elseif($user->role === 'recruiter')
+                                @elseif($primaryRole === 'recruiter')
                                     <span class="font-label-caps text-label-caps bg-secondary-fixed/10 text-secondary-fixed px-sm py-xs rounded-full">Reclutador</span>
-                                @else
+                                @elseif($primaryRole === 'developer')
                                     <span class="font-label-caps text-label-caps bg-surface-container text-on-surface-variant px-sm py-xs rounded-full">Desarrollador</span>
+                                @else
+                                    <span class="font-label-caps text-label-caps bg-surface-container text-on-surface-variant px-sm py-xs rounded-full">Sin rol</span>
                                 @endif
                             </td>
                             <td class="px-lg py-md">

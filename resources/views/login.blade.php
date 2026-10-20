@@ -186,17 +186,28 @@
 <p class="font-body-md text-body-md text-on-surface-variant">Sign in to access your developer profile</p>
 </div>
 <!-- Form -->
-<form class="space-y-md">
+<form action="{{ route('login.post') }}" method="POST" class="space-y-md">
+@csrf
 <div class="space-y-sm">
 <label class="font-label-caps text-label-caps text-on-surface-variant block" for="email">Email Address</label>
-<input class="input-field w-full rounded-lg px-md py-sm font-body-md text-body-md transition-all duration-200" id="email" placeholder="engineer@example.com" required="" type="email"/>
+<input class="input-field w-full rounded-lg px-md py-sm font-body-md text-body-md transition-all duration-200" id="email" name="email" value="{{ old('email') }}" placeholder="engineer@example.com" autocomplete="email" required="" type="email"/>
+@error('email')
+<p class="font-body-sm text-body-sm text-error">{{ $message }}</p>
+@enderror
 </div>
 <div class="space-y-sm">
 <div class="flex justify-between items-center">
 <label class="font-label-caps text-label-caps text-on-surface-variant block" for="password">Password</label>
 <a class="font-body-sm text-body-sm text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all" href="#">Forgot Password?</a>
 </div>
-<input class="input-field w-full rounded-lg px-md py-sm font-body-md text-body-md transition-all duration-200" id="password" placeholder="••••••••" required="" type="password"/>
+<input class="input-field w-full rounded-lg px-md py-sm font-body-md text-body-md transition-all duration-200" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required="" type="password"/>
+@error('password')
+<p class="font-body-sm text-body-sm text-error">{{ $message }}</p>
+@enderror
+</div>
+<div class="flex items-center gap-sm">
+<input class="form-checkbox text-primary-fixed bg-surface-container border-outline-variant rounded-sm focus:ring-primary-fixed" id="remember" name="remember" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface-variant" for="remember">Remember me</label>
 </div>
 <button class="btn-primary w-full rounded-lg py-sm font-label-caps text-label-caps font-bold mt-md active:scale-95 transition-transform flex justify-center items-center gap-sm" type="submit">
                     Sign In

@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class AdminUserController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::query();
+        $query = User::with('roles');
 
         if ($search = $request->input('search')) {
             $query->where(function ($q) use ($search) {
@@ -26,12 +27,16 @@ class AdminUserController extends Controller
 
     public function show(User $user)
     {
+        $user->load('roles');
+
         return view('admin.users.show', compact('user'));
     }
 
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $roles = Role::all();
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, User $user)
@@ -39,10 +44,15 @@ class AdminUserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-            'role' => 'required|in:developer,recruiter,admin',
+            'role' => 'required|exists:roles,name',
         ]);
 
-        $user->update($validated);
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ]);
+
+        $user->syncRoles([$validated['role']]);
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Usuario actualizado correctamente.');

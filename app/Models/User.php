@@ -15,7 +15,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
     ];
 
     protected $hidden = [
@@ -33,22 +32,22 @@ class User extends Authenticatable
 
     public function isDeveloper(): bool
     {
-        return $this->role === 'developer';
+        return $this->hasRole('developer');
     }
 
     public function isRecruiter(): bool
     {
-        return $this->role === 'recruiter';
+        return $this->hasRole('recruiter');
     }
 
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->hasRole('admin');
     }
 
     public function getRoleLabelAttribute(): string
     {
-        return match ($this->role) {
+        return match ($this->getRoleNames()->first()) {
             'developer' => 'Desarrollador',
             'recruiter' => 'Reclutador',
             'admin' => 'Administrador',

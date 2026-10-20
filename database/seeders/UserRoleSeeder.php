@@ -10,31 +10,31 @@ class UserRoleSeeder extends Seeder
 {
     public function run(): void
     {
-        User::updateOrCreate(
+        $developer = User::updateOrCreate(
             ['email' => 'developer@linkjobs.com'],
             [
                 'name' => 'Developer User',
                 'password' => Hash::make('password'),
-                'role' => 'developer',
             ]
         );
+        $developer->syncRoles(['developer']);
 
-        User::updateOrCreate(
+        $recruiter = User::updateOrCreate(
             ['email' => 'recruiter@linkjobs.com'],
             [
                 'name' => 'Recruiter User',
                 'password' => Hash::make('password'),
-                'role' => 'recruiter',
             ]
         );
+        $recruiter->syncRoles(['recruiter']);
 
-        User::updateOrCreate(
+        $admin = User::updateOrCreate(
             ['email' => 'admin@linkjobs.com'],
             [
                 'name' => 'Admin User',
                 'password' => Hash::make('password'),
-                'role' => 'admin',
             ]
         );
+        $admin->syncRoles(['admin']);
     }
 }

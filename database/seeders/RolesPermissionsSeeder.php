@@ -26,10 +26,12 @@ class RolesPermissionsSeeder extends Seeder
         $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
         $admin->syncPermissions(Permission::all());
 
-        $editor = Role::firstOrCreate(['name' => 'editor', 'guard_name' => 'web']);
-        $editor->syncPermissions(['view-dashboard', 'manage-jobs']);
+        $recruiter = Role::firstOrCreate(['name' => 'recruiter', 'guard_name' => 'web']);
+        $recruiter->syncPermissions(['view-dashboard', 'manage-jobs']);
 
-        $viewer = Role::firstOrCreate(['name' => 'viewer', 'guard_name' => 'web']);
-        $viewer->syncPermissions(['view-dashboard']);
+        $developer = Role::firstOrCreate(['name' => 'developer', 'guard_name' => 'web']);
+        $developer->syncPermissions(['view-dashboard']);
+
+        Role::whereIn('name', ['editor', 'viewer'])->delete();
     }
 }

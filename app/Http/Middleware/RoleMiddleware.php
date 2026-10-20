@@ -17,7 +17,7 @@ class RoleMiddleware
 
         $user = Auth::user();
 
-        if (! in_array($user->role, $roles)) {
+        if (! $user->hasAnyRole($roles)) {
             abort(403, 'No tienes permiso para acceder a esta sección.');
         }
 

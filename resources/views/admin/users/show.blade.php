@@ -30,6 +30,10 @@
         <div class="p-xl space-y-lg">
             <div class="grid grid-cols-2 gap-lg">
                 <div>
+                    <label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">Rol</label>
+                    <p class="font-body-sm text-body-sm text-on-surface">{{ $user->role_label }}</p>
+                </div>
+                <div>
                     <label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs">ID</label>
                     <p class="font-code-md text-code-md text-on-surface">#{{ $user->id }}</p>
                 </div>
