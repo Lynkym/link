@@ -44,23 +44,44 @@
                     @enderror
                 </div>
 
-                <div>
-                    @php($currentRole = old('role', $user->getRoleNames()->first()))
-                    <label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs" for="role">Rol *</label>
-                    <select name="role" id="role"
-                            class="w-full bg-background border border-outline-variant rounded-lg px-md py-sm font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed/20 transition-all">
-                        @foreach($roles as $role)
-                            <option value="{{ $role->name }}" {{ $currentRole === $role->name ? 'selected' : '' }}>
-                                {{ match($role->name) { 'developer' => 'Desarrollador', 'recruiter' => 'Reclutador', 'admin' => 'Administrador', default => ucfirst($role->name) } }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('role')
-                        <p class="text-error text-body-sm mt-xs">{{ $message }}</p>
-                    @enderror
-                </div>
+                @include('admin.users._role-select', ['selected' => old('role', $user->getRoleNames()->first())])
             </div>
         </div>
+
+        @if(Auth::guard('admin')->user()->canManagePasswords())
+            <div class="bg-surface-container-high border border-outline-variant/20 rounded-lg overflow-hidden">
+                <div class="p-lg border-b border-outline-variant/20">
+                    <h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+                        <span class="material-symbols-outlined text-primary-fixed">key</span>
+                        Contraseña
+                    </h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Dejá los campos vacíos para mantener la contraseña actual.</p>
+                </div>
+                <div class="p-lg space-y-lg">
+                    <div>
+                        <label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs" for="password">Nueva contraseña</label>
+                        <input type="password" name="password" id="password" autocomplete="new-password"
+                               class="w-full bg-background border border-outline-variant rounded-lg px-md py-sm font-body-sm text-body-sm text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed/20 transition-all"
+                               placeholder="Mínimo 8 caracteres">
+                        @error('password')
+                            <p class="text-error text-body-sm mt-xs">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label class="block font-label-caps text-label-caps text-on-surface-variant mb-xs" for="password_confirmation">Confirmar contraseña</label>
+                        <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password"
+                               class="w-full bg-background border border-outline-variant rounded-lg px-md py-sm font-body-sm text-body-sm text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed/20 transition-all"
+                               placeholder="Repetí la contraseña">
+                    </div>
+                </div>
+            </div>
+        @else
+            <div class="bg-surface-container-high border border-outline-variant/20 rounded-lg p-lg flex items-center gap-sm">
+                <span class="material-symbols-outlined text-on-surface-variant">lock</span>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">No tenés permiso para cambiar contraseñas.</p>
+            </div>
+        @endif
 
         <div class="flex items-center justify-end gap-md">
             <a href="{{ route('admin.users.index') }}" class="bg-surface-container-high border border-outline-variant/30 text-on-surface-variant font-label-caps text-label-caps px-lg py-sm rounded hover:bg-surface-container transition-colors active:scale-95">

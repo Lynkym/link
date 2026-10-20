@@ -105,22 +105,7 @@
             }
         }
     </script>
-    <style>
-        body {
-            background-color: #07122a;
-            color: #d9e2ff;
-            -webkit-font-smoothing: antialiased;
-        }
-        .glass-panel {
-            background: rgba(17, 34, 64, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(35, 53, 84, 0.5);
-        }
-        .tech-chip {
-            background-color: #112240;
-            border: 1px solid rgba(100, 255, 218, 0.2);
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="antialiased min-h-screen flex flex-col">
     <!-- Navigation -->

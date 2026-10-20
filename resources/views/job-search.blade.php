@@ -171,6 +171,7 @@
           },
         }
       </script>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="bg-background text-on-surface font-body-md text-body-md min-h-screen flex flex-col">
 <!-- TopNavBar -->

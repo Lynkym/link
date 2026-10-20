@@ -104,44 +104,7 @@
         },
       }
     </script>
-<style>
-        body {
-            background-color: #0A192F;
-            color: #CCD6F6;
-        }
-        .glass-panel {
-            background: rgba(17, 34, 64, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid #233554;
-        }
-        .tech-chip {
-            background-color: #112240;
-            border: 1px solid rgba(100, 255, 218, 0.2);
-        }
-        .job-card {
-            background-color: #112240;
-            border: 1px solid #233554;
-            transition: all 0.2s ease;
-        }
-        .job-card:hover {
-            border-color: #64FFDA;
-            transform: translateY(-4px);
-        }
-        .btn-primary {
-            background-color: #64FFDA;
-            color: #0A192F;
-        }
-        .btn-secondary {
-            border: 1px solid #64FFDA;
-            color: #64FFDA;
-        }
-        .btn-secondary:hover {
-            background-color: rgba(100, 255, 218, 0.1);
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="antialiased min-h-screen flex flex-col">
 <!-- TopNavBar (Shared Component) -->

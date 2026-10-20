@@ -42,4 +42,9 @@ class AdminUser extends Authenticatable
     {
         return $this->is_active;
     }
+
+    public function canManagePasswords(): bool
+    {
+        return in_array($this->role, ['super_admin', 'admin'], true);
+    }
 }

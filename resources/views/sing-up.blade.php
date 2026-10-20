@@ -173,16 +173,7 @@
           },
         }
     </script>
-<style>
-        /* Custom glow utilities */
-        .glow-hover:hover {
-            box-shadow: 0 0 12px 0px rgba(95, 251, 214, 0.1);
-        }
-        .glow-focus:focus-within {
-            box-shadow: inset 0 0 0 2px rgba(95, 251, 214, 0.2);
-            border-color: #5ffbd6;
-        }
-    </style>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="bg-background text-on-background min-h-screen flex items-center justify-center p-margin-mobile md:p-margin-desktop font-body-md relative overflow-hidden">
 <!-- Abstract Tech Background Elements -->

@@ -4,7 +4,7 @@
 @section('header', 'Gestión de Usuarios')
 
 @section('actions')
-<a href="#" class="bg-primary-fixed text-surface font-label-caps text-label-caps px-md py-sm rounded hover:bg-primary-fixed/90 transition-colors active:scale-95 flex items-center gap-xs">
+<a href="{{ route('admin.users.create') }}" class="bg-primary-fixed text-surface font-label-caps text-label-caps px-md py-sm rounded hover:bg-primary-fixed/90 transition-colors active:scale-95 flex items-center gap-xs">
     <span class="material-symbols-outlined text-[18px]">person_add</span>
     Nuevo Usuario
 </a>

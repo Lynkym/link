@@ -47,7 +47,12 @@ class User extends Authenticatable
 
     public function getRoleLabelAttribute(): string
     {
-        return match ($this->getRoleNames()->first()) {
+        return self::roleLabel($this->getRoleNames()->first() ?? '');
+    }
+
+    public static function roleLabel(string $role): string
+    {
+        return match ($role) {
             'developer' => 'Desarrollador',
             'recruiter' => 'Reclutador',
             'admin' => 'Administrador',

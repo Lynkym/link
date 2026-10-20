@@ -104,56 +104,7 @@
             }
         }
     </script>
-<style>
-        body {
-            background-color: #07122a; /* background color */
-            color: #d9e2ff; /* on-background */
-        }
-        
-        .glass-panel {
-            background-color: rgba(17, 34, 64, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid #233554;
-        }
-
-        .btn-primary {
-            background-color: #64FFDA;
-            color: #0A192F;
-        }
-
-        .btn-secondary {
-            border: 1px solid #64FFDA;
-            color: #64FFDA;
-            transition: background-color 0.2s;
-        }
-        
-        .btn-secondary:hover {
-            background-color: rgba(100, 255, 218, 0.1);
-        }
-
-        .input-field {
-            background-color: #0A192F;
-            border: 1px solid #233554;
-            color: #d9e2ff;
-        }
-        
-        .input-field:focus {
-            border-color: #64FFDA;
-            box-shadow: inset 0 0 0 2px rgba(100, 255, 218, 0.2);
-            outline: none;
-        }
-        
-        .social-btn {
-            background-color: #112240;
-            border: 1px solid #233554;
-            transition: border-color 0.2s;
-        }
-        
-        .social-btn:hover {
-            border-color: #64FFDA;
-        }
-    </style>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
 <!-- TopNavBar (Suppressed for transactional page, but retained per instructions) -->

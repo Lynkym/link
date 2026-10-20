@@ -103,22 +103,7 @@
             }
         }
     </script>
-    <style>
-        body {
-            background-color: #07122a;
-            color: #d9e2ff;
-            -webkit-font-smoothing: antialiased;
-        }
-        .glass-panel {
-            background: rgba(17, 34, 64, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(35, 53, 84, 0.5);
-        }
-        .glow-focus:focus-within {
-            box-shadow: inset 0 0 0 2px rgba(95, 251, 214, 0.2);
-            border-color: #5ffbd6;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="min-h-screen flex items-center justify-center p-lg font-body-md relative overflow-hidden">
     {{-- Background Elements --}}

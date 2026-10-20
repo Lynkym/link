@@ -103,46 +103,7 @@
             }
         }
     </script>
-    <style>
-        body {
-            background-color: #07122a;
-            color: #d9e2ff;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .glass-panel {
-            background: rgba(17, 34, 64, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(35, 53, 84, 0.5);
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #07122a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #233554;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3c4962;
-        }
-
-        .sidebar-link {
-            transition: all 0.2s ease;
-        }
-        .sidebar-link:hover {
-            background: rgba(31, 41, 66, 0.5);
-            border-left: 2px solid #5ffbd6;
-        }
-        .sidebar-link.active {
-            background: rgba(95, 251, 214, 0.1);
-            border-left: 2px solid #5ffbd6;
-            color: #5ffbd6;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @stack('styles')
 </head>
 <body class="bg-background text-on-surface font-body-md min-h-screen flex">

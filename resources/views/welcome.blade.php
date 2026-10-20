@@ -169,47 +169,7 @@
           },
         }
       </script>
-<style>
-        body {
-            background-color: #0A192F;
-            color: #d9e2ff;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .code-pattern {
-            background-image: radial-gradient(circle at 2px 2px, rgba(100, 255, 218, 0.05) 1px, transparent 0);
-            background-size: 24px 24px;
-        }
-
-        /* Glassmorphism utilities */
-        .glass-panel {
-            background: rgba(17, 34, 64, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(35, 53, 84, 0.5);
-        }
-
-        /* Custom scrollbar for webkit */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0A192F; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #233554; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3c4962; 
-        }
-
-        /* Nav Transition */
-        #main-nav.scrolled {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
-        }
-    </style>
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen flex flex-col">
 <!-- Navigation -->
