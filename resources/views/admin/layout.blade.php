@@ -212,12 +212,13 @@
                     <p class="font-body-sm text-body-sm text-on-surface truncate">{{ Auth::guard('admin')->user()->name ?? 'Admin' }}</p>
                     <p class="font-label-caps text-label-caps text-on-surface-variant">{{ ucfirst(Auth::guard('admin')->user()->role ?? 'admin') }}</p>
                 </div>
-                <form action="{{ route('admin.logout') }}" method="POST" class="hidden">
+                <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf
+                    <button type="submit" title="Cerrar sesión"
+                            class="p-xs rounded hover:bg-error-container/20 transition-colors text-on-surface-variant hover:text-error">
+                        <span class="material-symbols-outlined text-[20px]">logout</span>
+                    </button>
                 </form>
-                <button onclick="this.closest('form').submit()" class="text-on-surface-variant hover:text-error transition-colors">
-                    <span class="material-symbols-outlined text-[20px]">logout</span>
-                </button>
             </div>
         </div>
     </aside>

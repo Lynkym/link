@@ -229,7 +229,7 @@
 </div>
 <!-- Actions (Desktop) -->
 <div class="hidden md:flex items-center gap-4">
-<a href="{{ route('login') }}" class="font-label-caps text-label-caps text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all duration-200">Sign In</a>
+<x-auth-nav classes="font-label-caps text-label-caps text-primary-fixed hover:underline decoration-primary-fixed underline-offset-4 transition-all duration-200" />
 <a href="{{ route('jobs') }}" class="font-label-caps text-label-caps bg-primary-fixed text-[#0A192F] px-6 py-3 rounded-DEFAULT font-semibold hover:opacity-90 transition-opacity active:scale-95">Find Jobs</a>
 </div>
 <!-- Mobile Menu Toggle -->

@@ -135,7 +135,7 @@
                 <a class="text-on-surface-variant hover:text-primary transition-colors rounded-lg px-sm py-xs" href="#">Salaries</a>
             </nav>
             <div class="flex items-center gap-md">
-                <a href="{{ route('login') }}" class="hidden md:block font-label-caps text-label-caps text-secondary-fixed hover:underline decoration-primary-fixed underline-offset-4">Sign In</a>
+                <x-auth-nav classes="hidden md:block font-label-caps text-label-caps text-secondary-fixed hover:underline decoration-primary-fixed underline-offset-4" />
                 <a href="{{ route('jobs') }}" class="bg-primary-fixed text-surface font-label-caps text-label-caps px-md py-sm rounded hover:opacity-90 transition-opacity">Post a Job</a>
             </div>
         </div>

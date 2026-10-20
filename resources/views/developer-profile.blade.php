@@ -162,7 +162,7 @@
 </div>
 <!-- Trailing Actions -->
 <div class="flex items-center gap-4">
-<a class="font-label-caps text-label-caps btn-secondary px-4 py-2 rounded-DEFAULT transition-colors hidden md:block" href="{{ route('login') }}">Sign In</a>
+<x-auth-nav classes="font-label-caps text-label-caps btn-secondary px-4 py-2 rounded-DEFAULT transition-colors hidden md:block" />
 <a class="font-label-caps text-label-caps btn-primary px-4 py-2 rounded-DEFAULT font-medium transition-colors hidden md:block" href="#">Post a Job</a>
 <!-- Mobile Menu Button -->
 <button class="md:hidden text-primary-fixed p-2">
